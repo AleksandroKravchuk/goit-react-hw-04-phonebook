@@ -10,7 +10,7 @@ export function App() {
   const [contacts, setContacts] = useState(() =>
     JSON.parse(localStorage.getItem('contacts'))
   );
-  const [filtr, setFilter] = useState('');
+  const [filter, setFilter] = useState('');
 
   useEffect(
     () => localStorage.setItem('contacts', JSON.stringify(contacts)),
@@ -48,9 +48,8 @@ export function App() {
     setFilter(evt.currentTarget.value);
   };
   const getVisibleName = () => {
-    const normalazedFilter = filtr.toLowerCase();
     return contacts.filter(item =>
-      item.name.toLowerCase().includes(normalazedFilter)
+      item.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
   const onDeleteName = id => {
@@ -67,7 +66,7 @@ export function App() {
         <Form onSubmit={addName}></Form>
       </Section>
       <Section title={'Contacts'}>
-        <Filter value={filtr} onChange={onChange}></Filter>
+        <Filter value={filter} onChange={onChange}></Filter>
         <Contacts name={getVisibleName()} deleteName={onDeleteName}></Contacts>
       </Section>
     </div>
