@@ -7,8 +7,8 @@ import Contacts from './Contacts/Contacts';
 import Filter from './Filter/Filter';
 
 export function App() {
-  const [contacts, setContacts] = useState(() =>
-    JSON.parse(localStorage.getItem('contacts'))
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) || []
   );
   const [filter, setFilter] = useState('');
 
@@ -49,12 +49,11 @@ export function App() {
   };
   const getVisibleName = () => {
     const normalazedFilter = filter.toLowerCase();
-    if (filter !== null) {
-      return contacts.filter(item =>
-        item.name.toLowerCase().includes(normalazedFilter)
-      );
-    }
+    return contacts.filter(item =>
+      item.name.toLowerCase().includes(normalazedFilter)
+    );
   };
+
   const onDeleteName = id => {
     setContacts(prevState => prevState.filter(item => item.id !== id));
   };
