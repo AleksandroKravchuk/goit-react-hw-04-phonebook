@@ -48,9 +48,12 @@ export function App() {
     setFilter(evt.currentTarget.value);
   };
   const getVisibleName = () => {
-    return contacts.filter(item =>
-      item.name.toLowerCase().includes(filter.toLowerCase())
-    );
+    const normalazedFilter = filter.toLowerCase();
+    if (filter !== null) {
+      return contacts.filter(item =>
+        item.name.toLowerCase().includes(normalazedFilter)
+      );
+    }
   };
   const onDeleteName = id => {
     setContacts(prevState => prevState.filter(item => item.id !== id));
