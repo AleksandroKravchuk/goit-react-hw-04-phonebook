@@ -5,14 +5,20 @@ export const Form = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const onAddName = evt => {
-    const value = evt.target.value;
-    setName(value);
+  const onChangeInput = evt => {
+    const { name, value } = evt.target;
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        break;
+    }
   };
-  const onAddTel = evt => {
-    const value = evt.target.value;
-    setNumber(value);
-  };
+
   const hendelSubmit = evt => {
     evt.preventDefault();
     if (name === '' || number === '') {
@@ -34,7 +40,7 @@ export const Form = ({ onSubmit }) => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={name}
-          onChange={onAddName}
+          onChange={onChangeInput}
         />
       </Label>{' '}
       <Label>
@@ -46,7 +52,7 @@ export const Form = ({ onSubmit }) => {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           value={number}
-          onChange={onAddTel}
+          onChange={onChangeInput}
         />
       </Label>{' '}
       <Button type="submit">Add contact</Button>

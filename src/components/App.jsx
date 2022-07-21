@@ -24,6 +24,7 @@ export function App() {
       number,
     };
     const normalizedName = name.toLowerCase();
+
     const chekedName = contacts.find(item => {
       return item.name.toLowerCase() === normalizedName;
     });
